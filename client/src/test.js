@@ -1,0 +1,16 @@
+// Paste the imageFilename value from your backend log here
+const testData = '{\"images\":[{\"data\":\"iVBORw0KGgoAAAANSUhEUgAABAAAAAJACAIAVUjTAODrcyUSoD4EQlAro0/r+UQghnm+7IMhIvx7UbqBCLFXfioFIXflj/Ctx0i4iK88avSuNeav5L5oj6rbilglymD9BKD51JRs707Zc6znrJBzRR2TiXD8FJhip1lThUdNpThfg3JWyBRegsgaE5VAehgJZoVKGlCGiqvBGbnC7ipEftoHHaeISrBVl8UB+x1l6KpR45RCb2GzBJrSvjbva7Mwcy+JU7liSetadqdrqHbNuxKNSVuaUImSP5Huom+uJlIxrKisayvx5Ztc7lCMo17SxM0U0vtU+h8qidyQCfi0FaR2QyJ3gKJ/eOyeilAu6KeaKcs5NWWrAsnflIFNe8KnqB/X9ahrqTZyzV6chYRJn+V2EvX68hXzFuyx8NPFM3DkWrhoi8DRze1oRZOeL0RB7Vq/gk1sHXjFptH16QIkkQvJ0vHkcR000c9IveUGZBnIOZipEbHeVSu0UapZEIGArsr0X+OhBLS/WQYAmFfZCGjRLN/DyAQ8Tz0fMPcLrwoNgD7u7SKcn3qpm+O5AGUH6SrbiP7PxHYS9nnmYUEOCp5LSq9i94t0tn8VCTn5d5i+oq5kOGSNA1B9pBkgx1kgiv3uU2WMCATwBEFQ/wdlACCpe8qulOujk0suc5Gq66AaUAZ9W+rGDXoG65XHspKj7hvTfxYs0PeLfD7dzs2/TA2TjCyiGnI3+mNYD01GrxaC1H2dlCKYEUFG1NeTqpATF04bSkohHDLAvDXVdc79HOa5XAZGQp6od3ysV6j1G45QOdb8GVBlAsTj8fj6iN/z+898BOJ7qlZYApEXK/b9T7cEk/Y0TCEApQExDgtTyZlQjAQZ+JsaUuwNam9muXLsSaLQU88zcFXLMeHVBX+cZD4mqTjmVV+bHxGfAMCHv1JuTY6dVKUoqoXoh6NS/Jxqa8F8oIgpq3Qjs42y6CoCI+ncuds/oaUbEXpv2HSw3BDSrKuvcszZqCkesqIVatSO80M7U4jwBgLMwPeoHOUbQf/HsxISgNaNPA+zBRLxeADQd7qLj1GGJFxZlUmrKrtAT6deyCOFOdfopwDySaLpyQYEcr5nYuOi1XOijErW50ctxlQMtXM2TooANn1rSnxRJKTKRSguLgOeMQRA+q8EE9DSym65EUtflMwiN+q0mLMwl41VYbZDQf7LA2c2AS3/nLVEhFaEh/V6FEC6qWL+1mVlhlAGjLFsmVksTQCaiPI25faf8odkdjNyKf4KqtcI0J/5BNaWLA2/EkAEvGYRlZwmkEZLMyUERK2EI0D4optOXSPRgBTrfFJfictf+WmfxNxPMHgGuEqZ6HUU6vrFCx985Dp0DqGSqW07Aj3HqEAmmWwipG82THNlmwk1eQDiW5Qry7qg7trMAaxI0L/EFHVlAIBzP25aSKYRY+0or6pa2CDkpuewC5RPg4ZRDXc1O0U07aZOSG7Rcd28WABoGUYQWhiquacVIKappn7oedYAAeR+chBFmxRFCYDkP3Mu80FeTwEmqQ1xeygRjL+3Gsi9Kp8QkXkE4ZmXCQMg4gFSgQL64+1iYvsku/+oazrJpWh/KlPnFQCTVAqZgzX9W1tLrqhH2DjVUlPD2SIQ9hbh/z4hACLqGkVQOhrIAFKEkjbJvljJVlJIu6m4BoBmG8GKDr0wRG7kEdRPMpMCyfKjh6YlZOGuJpsceyrKm/ZLa+e3xOOxbqFqbaJI4EHQPrwqn8goUx/AqAMBfVjsxZAxaCUAEYEgiS/xp0f8P+4C91pE6e9nAAAAAElFTkSuQmCC","filename":"flux_lovestory_00006_.png","type":"base64"}]}';
+
+const parsed = JSON.parse(testData);
+console.log('✅ Parsed successfully:', parsed);
+
+// Extract the base64
+const base64 = parsed.images[0].data;
+console.log('✅ Base64 extracted, length:', base64.length);
+console.log('✅ Base64 starts with:', base64.substring(0, 20));
+
+// Decode to verify it's valid
+const buffer = Buffer.from(base64, 'base64');
+console.log('✅ Decoded buffer size:', buffer.length, 'bytes');
+
+console.log('\n🎉 SUCCESS! The parsing logic works.');

@@ -1,0 +1,102 @@
+/* src/landing.css */
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #050505;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+  
+  /* Typography Overrides */
+  .font-serif {
+    font-family: 'Playfair Display', serif;
+  }
+  .font-sans {
+    font-family: 'Inter', sans-serif;
+  }
+  
+  /* Custom Colors */
+  .text-rose-custom {
+    color: rgba(251, 175, 218, 0.9);
+  }
+  .bg-rose-custom {
+    background-color: rgba(189, 155, 175, 0.9);
+  }
+  .border-rose-custom {
+    border-color: rgba(251, 207, 232, 0.3);
+  }
+  .shadow-rose-custom {
+    box-shadow: 0 0 40px -10px rgba(251, 207, 232, 0.3);
+  }
+  
+  /* Scrolling Script Animation */
+  @keyframes scroll-up {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(-50%);
+    }
+  }
+  .animate-scroll-up {
+    animation: scroll-up 20s linear infinite;
+  }
+  
+  /* Shimmer for audio bar */
+  @keyframes shimmer {
+    100% {
+      transform: translateX(100%);
+    }
+  }
+  
+  /* --- CARD SPOTLIGHT --- */
+  .card-spotlight {
+    position: relative;
+    background: #0a0a0a;
+  }
+  .card-spotlight::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    background: radial-gradient(
+      600px circle at var(--card-x) var(--card-y),
+      rgba(251, 207, 232, 0.3),
+      transparent 40%
+    );
+    z-index: 0;
+    opacity: 0;
+    transition: opacity 0.5s;
+  }
+  .card-spotlight:hover::before {
+    opacity: 1;
+  }
+  .card-inner {
+    position: relative;
+    z-index: 1;
+    background: #0a0a0a;
+    border-radius: inherit;
+    height: 100%;
+  }
+  
+  /* Slow bounce (if you later use it) */
+  @keyframes bounce-slow {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-3px);
+    }
+  }
+  .animate-bounce-slow {
+    animation: bounce-slow 2s infinite;
+  }

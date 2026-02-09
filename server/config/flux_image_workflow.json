@@ -1,0 +1,90 @@
+{
+  "1": {
+    "class_type": "CheckpointLoaderSimple",
+    "inputs": {
+      "ckpt_name": "flux1-dev-fp8.safetensors"
+    },
+    "_meta": {
+      "title": "Load Flux Checkpoint"
+    }
+  },
+
+  "5": {
+    "class_type": "LoraLoader",
+    "inputs": {
+      "model": ["1", 0],
+      "clip": ["1", 1],
+      "lora_name": "Canopus-Pixar-3D-FluxDev-LoRA.safetensors",
+      "strength_model": 0.6,
+      "strength_clip": 0.5
+    },
+    "_meta": {
+      "title": "Pixar 3D LoRA"
+    }
+  },
+
+  "2": {
+    "class_type": "EmptyLatentImage",
+    "inputs": {
+      "width": 1024,
+      "height": 576,
+      "batch_size": 1
+    },
+    "_meta": {
+      "title": "Latent Size (16:9 for video)"
+    }
+  },
+
+  "40": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "PLACEHOLDER_PROMPT",
+      "clip": ["5", 1]
+    },
+    "_meta": {
+      "title": "Positive Prompt"
+    }
+  },
+
+  "50": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": ["5", 0],
+      "positive": ["40", 0],
+      "negative": ["40", 0],
+      "latent_image": ["2", 0],
+      "seed": 0,
+      "control_after_generate": "fixed",
+      "cfg": 1.5,
+      "steps": 28,
+      "sampler_name": "heun",
+      "scheduler": "beta",
+      "denoise": 1
+    },
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+
+  "60": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": ["50", 0],
+      "vae": ["1", 2]
+    },
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+
+  "70": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": ["60", 0],
+      "filename_prefix": "flux_pixar"
+    },
+    "_meta": {
+      "title": "Save Image"
+    }
+  }
+}

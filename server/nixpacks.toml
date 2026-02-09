@@ -1,0 +1,10 @@
+# lovestory-ai/server/nixpacks.toml
+
+[phases.setup]
+nixPkgs = ["nodejs_18", "ffmpeg"]
+
+[phases.install]
+cmds = ["npm ci"]
+
+[start]
+cmd = "node index.js"

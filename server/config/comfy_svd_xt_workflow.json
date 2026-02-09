@@ -1,0 +1,244 @@
+{
+  "1": {
+    "inputs": {
+      "text": "low quality, distortion, morphing, blurry, ugly, bad hands, extra limbs, text, watermark",
+      "clip": [
+        "2",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "Negative Prompt"
+    }
+  },
+  "2": {
+    "inputs": {
+      "clip_name": "umt5_xxl_fp8_e4m3fn_scaled.safetensors",
+      "type": "wan",
+      "device": "default"
+    },
+    "class_type": "CLIPLoader",
+    "_meta": {
+      "title": "Load CLIP (Wan)"
+    }
+  },
+  "3": {
+    "inputs": {
+      "vae_name": "wan_2.1_vae.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "Load VAE"
+    }
+  },
+  "20": {
+    "inputs": {
+      "image": "example.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "First Frame"
+    }
+  },
+  "25": {
+    "inputs": {
+      "image": "last_frame.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Last Frame"
+    }
+  },
+  "22": {
+    "inputs": {
+      "image1": [
+        "20",
+        0
+      ],
+      "image2": [
+        "25",
+        0
+      ]
+    },
+    "class_type": "ImageBatch",
+    "_meta": {
+      "title": "Batch Start & End Frames"
+    }
+  },
+  "21": {
+    "inputs": {
+      "text": "Positive Prompt Placeholder",
+      "clip": [
+        "2",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "Positive Prompt"
+    }
+  },
+  "50": {
+    "inputs": {
+      "seed": 32567,
+      "steps": 30,
+      "cfg": 7,
+      "sampler_name": "heun",
+      "scheduler": "beta",
+      "denoise": 0.8,
+      "model": [
+        "71",
+        0
+      ],
+      "positive": [
+        "72",
+        0
+      ],
+      "negative": [
+        "72",
+        1
+      ],
+      "latent_image": [
+        "72",
+        2
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+  "60": {
+    "inputs": {
+      "samples": [
+        "50",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "70": {
+    "inputs": {
+      "frame_rate": 15,
+      "loop_count": 0,
+      "filename_prefix": "Omnia_Output",
+      "format": "video/h264-mp4",
+      "pix_fmt": "yuv420p",
+      "crf": 19,
+      "save_metadata": true,
+      "trim_to_audio": false,
+      "pingpong": false,
+      "save_output": true,
+      "images": [
+        "60",
+        0
+      ]
+    },
+    "class_type": "VHS_VideoCombine",
+    "_meta": {
+      "title": "Video Combine"
+    }
+  },
+  "71": {
+    "inputs": {
+      "unet_name": "Wan2.1/wan2.1_flf2v_720p_14B_fp8_e4m3fn.safetensors",
+      "weight_dtype": "fp8_e4m3fn"
+    },
+    "class_type": "UNETLoader",
+    "_meta": {
+      "title": "Load Diffusion Model"
+    }
+  },
+  "72": {
+    "inputs": {
+      "width": 768,
+      "height": 576,
+      "length": 75,
+      "batch_size": 1,
+      "positive": [
+        "21",
+        0
+      ],
+      "negative": [
+        "1",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ],
+      "clip_vision_output": [
+        "73",
+        0
+      ],
+      "start_image": [
+        "22",
+        0
+      ]
+    },
+    "class_type": "WanImageToVideo",
+    "_meta": {
+      "title": "WanImageToVideo (Batched Input)"
+    }
+  },
+  "73": {
+    "inputs": {
+      "crop": "center",
+      "clip_vision": [
+        "74",
+        0
+      ],
+      "image": [
+        "22",
+        0
+      ]
+    },
+    "class_type": "CLIPVisionEncode",
+    "_meta": {
+      "title": "CLIP Vision Encode"
+    }
+  },
+  "74": {
+    "inputs": {
+      "clip_name": "clip_vision_h.safetensors"
+    },
+    "class_type": "CLIPVisionLoader",
+    "_meta": {
+      "title": "Load CLIP Vision"
+    }
+  },
+  "75": {
+    "inputs": {
+      "filenames": [
+        "70",
+        0
+      ],
+      "label": "video_output"
+    },
+    "class_type": "VideoOutputBridge",
+    "_meta": {
+      "title": "Video Output Bridge"
+    }
+  },
+  "80": {
+    "inputs": {
+      "filename_prefix": "RunPod_Signal",
+      "images": [
+        "20",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "RunPod Success Signal"
+    }
+  }
+}
