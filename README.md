@@ -11,8 +11,6 @@ Omnnia turns your love memories into a heartwarming, Pixar-style short film. No 
 - **AI Narration** — Choose from multiple voices or record your own, powered by ElevenLabs and Google TTS
 - **Custom Soundtrack** — Background music and audio mixing built in
 - **Timeline Editor** — Drag-and-drop timeline to arrange and fine-tune your film
-- **Cloud Storage** — Projects saved to Cloudflare R2 so you can access them anywhere
-- **Credit System** — Powered by Stripe for seamless upgrades
 
 ## Tech Stack
 
@@ -24,7 +22,6 @@ Omnnia turns your love memories into a heartwarming, Pixar-style short film. No 
 | Database | Firestore |
 | AI/ML | Google Gemini, Google Veo, ElevenLabs |
 | Storage | Cloudflare R2 |
-| Payments | Stripe |
 | Deployment | Railway |
 
 ## Getting Started
